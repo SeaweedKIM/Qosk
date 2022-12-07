@@ -463,11 +463,12 @@ def test(request):
 
 # Cart View ---------------------------------
 
+
 from .models import CartItem
 from django.core.exceptions import ObjectDoesNotExist
 
 
-
+# 추가, 수량, 가격 조회 기능 ---------------
 
 def add_cart1(request, food_id):
     food = get_object_or_404(List, pk=food_id)
@@ -596,3 +597,25 @@ def add_cart4(request, food_id):
 #         pass
 
 #     return render(request, 'cart.html', dict(cart_items=cart_items, total=total, counter=counter))
+
+
+
+# 제거 기능 -------------------
+
+def remove_cart1(request, food_id):
+    food = get_object_or_404(List, pk=food_id)
+    cart_item = CartItem.objects.get(food = food)
+    if cart_item.quantity >1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    
+    return redirect('kiosk:menu1')
+
+
+# 전체 삭제 기능 -----------------
+def clear1(request):
+    cart_item = CartItem.objects.all()
+    cart_item.delete()
+    return redirect('kiosk:menu1')
