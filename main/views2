@@ -1,0 +1,39 @@
+def Coffee(request):
+    page = request.GET.get('page', '1')  # 페이지
+    coffee_category = List.objects.filter(category='커피')
+    coffee_paginator = Paginator(coffee_category, 6)  # 페이지당 n개씩 보여주기
+    coffee_page_obj = coffee_paginator.get_page(page)
+    context = {
+        'coffee_category':coffee_page_obj,
+        }
+    return render(request, 'menu.html', context)
+
+def Tea(request):
+    page = request.GET.get('page', '1')  # 페이지
+    tea_category = List.objects.filter(category='차')
+    tea_paginator = Paginator(tea_category, 6)  # 페이지당 n개씩 보여주기
+    tea_page_obj = tea_paginator.get_page(page)
+    context = {
+        'tea_category':tea_page_obj,
+        }
+    return render(request, 'menu.html', context)
+
+def Beverage(request):
+    page = request.GET.get('page', '1')  # 페이지
+    beverage_category = List.objects.filter(category='음료')
+    beverage_paginator = Paginator(beverage_category, 6)  # 페이지당 n개씩 보여주기
+    beverage_page_obj = beverage_paginator.get_page(page)
+    context = {
+        'beverage_category':beverage_page_obj,
+        }
+    return render(request, 'menu.html', context)
+
+def Dessert(request):
+    page = request.GET.get('page', '1')  # 페이지
+    dessert_category = List.objects.filter(category='디저트')
+    dessert_paginator = Paginator(dessert_category, 6)  # 페이지당 n개씩 보여주기
+    dessert_page_obj = dessert_paginator.get_page(page)
+    context = {
+        'dessert_category':dessert_page_obj,
+        }
+    return render(request, 'menu.html', context)

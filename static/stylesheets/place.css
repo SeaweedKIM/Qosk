@@ -1,0 +1,96 @@
+/*#header .logo .symbol img {
+    display: block;
+    width: 150px;
+    height: 80px;
+    position:absolute;
+    z-index:5;
+    top:20px;
+    left: 620px;
+}
+
+@media (max-width: 1100px) {
+    #header .logo .symbol img {
+        display: block;
+        width: 170px;
+        height: 100px;
+        position:absolute;
+        z-index:5;
+        top:20px;
+        left: 430px;
+    }
+}
+*/
+
+
+
+#main {
+    position: absolute;
+    left: 10%; right: 10%; top:5%;
+    display: block;
+}
+
+#main .text {
+    position: relative;
+    font-size: 4vw;
+    text-align: center;
+}
+
+#main .btn {
+    width: 80%;
+    margin: auto;
+}
+
+#main .btn .store img {
+    width: 47%;
+    height: 60%;
+    padding: 5%;
+}
+
+#main .btn .takeout img {
+    width: 47%;
+    height: 60%;
+    padding: 5%;
+}
+
+/* #main .btn .store img {
+    width: 250px;
+    height: 300px;
+    position: absolute;
+}
+
+#main .btn .takeout img {
+    width: 250px;
+    height: 300px;
+    position: absolute;
+} */
+
+/*@media (max-width: 1100px) {
+    #main {
+        width: 100px;
+    }
+    
+    #main .btn {
+        position: absolute;
+        top: 350px;
+    }
+    
+    #main .btn .store img {
+        width: 200px;
+        height: 280px;
+        position: absolute;
+        left: 250px;
+    }
+    
+    #main .btn .takeout img {
+        width: 200px;
+        height: 280px;
+        position: absolute;
+        left: 550px;
+    }
+
+    #main .text {
+        font-size: 24px;
+        font-weight: bold;
+        position:absolute; left:350px; top:200px;
+    }
+}*/

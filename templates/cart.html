@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} cart {% endblock %}
+
+{% block content %}
+{% if not cart_items %}
+<div>
+    <div class = "text-center">
+        <br>
+        <h1 class = "text-center-my_title">
+            현재 목록이 비어있습니다
+        </h1>
+        <br>
+        <p class = "text-center">
+            <a href = "{%url 'kiosk:menu1' %}">메뉴페이지</a>
+        </p>
+    </div>
+</div>
+{%else%}
+    <div>
+        <div class = "text_center">
+            <br>
+            <h1 class = "text-center my_title">
+                주문 내역
+            </h1>
+            <br>
+        </div>
+    </div>
+    <div class = "row mx_auto">
+        <div>
+            <table>
+                <thread class = "my_custom_thread">
+                    <tr>
+                        <th colspan="5">
+                            선택한 상품
+                        </th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {%for cart_item in cart_items%}
+                    <tr>
+                        <td>
+                            {{cart_item.food.food_name}}
+                            <br>
+                            가격 : {{cart_item.food.price}}
+                        </td>
+                        <td>
+                            수량 : {{cart_item.quantity}}
+                        </td>
+                        <td>
+                            상품 총 가격 : {{cart_item.sub_total}}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>

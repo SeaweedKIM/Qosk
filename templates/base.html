@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    {% comment %} <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/place.css' %}"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/face.css' %}">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/load.css' %}"> {% endcomment %}
+
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo-h.png' %}" />
+    <link href="{% static 'stylesheets/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'stylesheets/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'stylesheets/menu.css' %}" rel="stylesheet" />
+    <link href="{% static 'stylesheets/vs.css' %}" rel="stylesheet" />
+
+
+    <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}">
+    
+    <title>{% block title %} Base page {% endblock %} </title>
+</head>
+
+<body>
+    {% comment %} <div id="header">
+        <h2 class = "maintitle">New Touch Kiosk</h2>
+        <h3 class = "welcome">Welcome</h3>
+    </div> {% endcomment %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<h2>Tower Predictor</h2>
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{ form }}<br><br>
+    <button onclick="location.href='#" type="submit" class="btn btn-primary">저장하기</button>
+</form>
+
+<td><a href="#">{{food_name}}<br></a></td>
+{% if image %}
+<img src="{{ image }}" alt="img">
+{% endif %}
+{{uploaded_file_url}}

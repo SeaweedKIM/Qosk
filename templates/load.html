@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extrastyle %} {% static 'stylesheets/load.css' %} {% endblock %}
+{% block title %} load {% endblock %}
+    
+{% block content %}
+    <div class="text"><p>인기순으로 메뉴 정렬 중...</p></div>
+
+    <div class="loader">
+    </div>
+
+    <div class="container" style="display:none;">
+      <meta http-equiv="refresh" content="2; url={% url 'kiosk:menu1' %}">
+    <div>
+
+    <script>
+      var loader = $("div.loader");
+      var container = $("div.container");
+      loader.css("display","none");
+      container.css("display","block");
+    </script>
+{% endblock %}

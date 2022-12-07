@@ -1,0 +1,31 @@
+{%load static%}
+<h1>{{ food.food_name }}</h1>
+<div>
+    {% if food.image %}
+    <a href=""><img style="background-image; height:300px;" src="{{food.image.url}}" alt="" ></a>
+    {% else %}
+    <a href=""><img style="background-image; height:300px;" src="{% static 'images/6c757d.png' %}" alt="" ></a>
+    {% endif %}
+    <br><br>
+    <h3>가격 : {{ food.price }} 원</h3>
+    {% if food.food_explain %}
+    설명 : {{food.food_explain}} <br><br>
+    {% else %}
+    {% endif %}
+    <div class="my-3">
+        <button><a href="{% url 'kiosk:food_modify' food.food_num  %}" 
+           class="btn btn-sm btn-outline-secondary">수정</a></button>
+        <button><a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+       data-uri="{% url 'kiosk:food_delete' food.food_num  %}">삭제</a></button>
+    </div>
+</div>
+<script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>

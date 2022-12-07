@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% comment %} {% block extrastyle %} {% static 'stylesheets/face.css' %} {% endblock %} {% endcomment %}
+{% block title %} face {% endblock %}
+    
+{% block content %}
+            <div id="main">
+                <div class="text"><p>인공지능 <span style='color:green; font-size:3vw;'><b>미리내</b></span> 입니다! 
+                    <br> 고객님의 <b>나이, 성별</b>에 맞춰 메뉴를 <span style='color:red'><b>인기순</b></span>으로 정렬해 드릴까요?</p></div>
+                <div class="btn">
+                    <a type="button" href="load/" class="btn btn-lg yes"><b>좋아요</b></a>
+                    <a type="button" href="{% url 'kiosk:menu1' %}" class="btn btn-lg no"><b>싫어요</b></a>
+                </div>
+            </div>
+{% endblock %}

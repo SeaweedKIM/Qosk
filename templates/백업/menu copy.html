@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} menu {% endblock %}
+
+
+{% comment %} {% block extrastyle %} {% static 'stylesheets/menu.css' %} {% endblock %} {% endcomment %}
+{% block content %}
+    <header>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <nav>
+            <div class="container1">
+
+                    <a class="logo">
+                        <span class="symbol"><img src="{% static 'images/logo-w.png' %}" alt="" /></span>
+                    </a>
+
+                    <a href="{% url 'kiosk:place' %}" class="home">
+                        <img src="{% static 'images/home.png' %}" alt="" />
+                    </a>
+            </div>
+        </nav>
+    </header>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block menu %}{% endblock %}
+
+
+    <!--            {% comment %} <button type="button" class="btn btn-secondary btn-lg prev">이전</button>
+                <button type="button" class="btn btn-secondary btn-lg next">다음</button> {% endcomment %}-->
+        <div class="ah">
+            <div id="record">
+                <div id="wrap">
+                  <main>
+                    <button class="mic">
+                      <img class="abc dictate" src="{% static 'images/mic_org.png' %}" />
+                    </button>
+                  </main>
+                    <div class="mic-text">
+                      <b>마이크를 누르고 </br>주문하실 메뉴를 말씀해주세요</b>
+                    </div>
+                </div>
+                <div class="search">
+                  <div class="input-bar">
+                    <input
+                      type="hidden"
+                      placeholder="검색어를 입력하세요"
+                      autocomplete="off"
+                      id="search_kw"
+                      class="form-control"
+                      value=" ="{{kw|default_if_none:''}}"/>
+                    <form id="searchForm" method="get" action="{% url 'kiosk:menulist' %}"> <!-- 값 전송-->
+                      <button class="submitbtn" type="submit" id="search">▶</button>
+                      <input type="hidden" id="kw" name="kw" value="="{{kw|default_if_none:''}}">
+                  </div>
+                </div>
+            </div>
+    
+
+    {%block order%}{%endblock%}
+
+            <div id="history">
+                <h4>주문내역</h4>
+                <table class="my_div" border=1>
+                  {%if cart_items %}
+
+                    {%for cart_item in cart_items%}
+                    <tr class="order_tr">
+                      <td>{{cart_item.food.food_name}}</td>
+                      <td>수량 : {{cart_item.quantity}}</td>
+                      <td>가격 : {{cart_item.sub_total}} 원
+                    </tr>
+                    <br>
+                    {%endfor%}
+
+                  {%endif%}
+                </table>
+                <hr>
+                <!--<p>총 금액 : </p>-->
+                <div class="payment">
+    <!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
+                    <input class="btn btn-secondary btn-lg" type='button' value='전체 취소' onclick='refresh()' />
+                    <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->
+                    <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='주문 확인' />
+                </div>
+            </div>
+    
+    
+    
+    <!--        <div id="my_modal">
+                <a class="modal_close_btn">닫기</a>
+            </div>-->
+    
+            <div id="my_modal" class="pop_wrap" style="display:none;">
+                <p class="dsc">주문 확인</p><hr>
+                <div class="btns">
+                    <a type="button" class="btn btn-secondary btn-lg btn_close" >닫기</a>
+                    <a type="button" class="btn btn-success btn-lg pay-money">현금</a>
+                    <a type="button" class="btn btn-primary btn-lg pay-card">카드</a>
+                </div>
+            </div>
+        </div>
+    
+    
+            <!-- Footer-->
+            <!--footer class="py-5 bg-dark"-->
+    <!--            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            </footer>-->
+            <!-- Core theme -->
+            <script src="{% static 'js/scripts.js' %}"></script>
+            <script src="{% static 'js/10-11.js' %}"></script>
+
+            
+{% endblock %}

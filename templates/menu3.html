@@ -1,0 +1,111 @@
+{% extends "menu.html" %}
+{% load static %}
+
+
+
+{% comment %} {% block extrastyle %} {% static 'stylesheets/menu.css' %} {% endblock %} {% endcomment %}
+
+{% block menu %}
+
+
+  <body>
+        <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-justified">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu1' %}">커피</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu2' %}">차</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'kiosk:menu3' %}">음료</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu4' %}">디저트</a>
+          </li>
+      </ul>
+
+    <div class="container">
+            <!-- Tab panes -->
+      <div class="tab-content">
+      <div class="tab-pane active" id="음료">
+        <img class="rank1" src="{% static 'images/1.png' %}">
+        <img class="rank2" src="{% static 'images/2.png' %}">
+        <img class="rank3" src="{% static 'images/3.png' %}">
+        {% if beverage_category %}
+        {% for beverage in beverage_category%}
+        <a href = {% url 'kiosk:add_cart3' beverage.food_num %}>
+        {% comment %} <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">  {% endcomment %}
+                    <div class="list-box">
+                        <div class="card h-100" type="button" value='innerHTML' onclick='setInnerHTML()'>
+                            {% if beverage.image  %}
+                            <!-- Product image-->
+                                <img style="aspect-ratio: 4 / 3; object-fit: contain;" src="{{beverage.image.url}}" alt="" >
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'images/6c757d.png' %}" alt="..." />
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{beverage.food_name}}</h5>
+                                    <!-- Product price-->
+                                    <p class="fw-lighter">{{beverage.price}} 원</p>
+                            </div>
+                            <!-- Product actions-->
+                        </div>
+                    </div>                        
+                {% comment %} </div>
+            </div>
+        </section> {% endcomment %}
+      </a>
+        
+        {% endfor %}
+
+        {% endif %}
+                      <!-- 음료 페이징처리 시작 -->
+                      <div class="paging">
+                        <ul class="pagination justify-content-center">
+                            <!-- 이전페이지 -->
+                            {% if beverage_category.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ beverage_category.previous_page_number }}">이전</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                            </li>
+                            {% endif %}
+                            <!-- 페이지리스트 -->
+                            {% for page_number in beverage_category.paginator.page_range %}
+                            {% if page_number == beverage_category.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 다음페이지 -->
+                            {% if beverage_category.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ beverage_category.next_page_number }}">다음</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <!-- 페이징처리 끝 -->
+                    </div>
+      </div>
+      </div>
+    </div>
+  </body>
+
+
+{% endblock %} 

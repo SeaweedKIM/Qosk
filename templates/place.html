@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extrastyle %} {% static 'stylesheets/place.css' %} {% endblock %}
+{% block title %} place {% endblock %}
+
+{% block content %}
+    <!-- Header>
+			<header id="header">
+				<div class="inner">
+					< Logo >
+					<a href="#" class="logo">
+						<span class="symbol"><img src="images/logo.jpg" alt="" /></span>
+					</a>
+                </div>
+            </header-->
+
+            <div id="main">
+                <div class="text"><p>식사하실 장소를 선택해주세요</p></div>
+
+                <div class="btn">
+                    <a href="../face/" class="store"><img src="{% static 'images/store.PNG' %}" alt="" /></a>
+                    <a href="../face/" class="takeout"><img src="{% static 'images/takeout.PNG' %}" alt="" /></a>
+                </div>
+
+
+            </div>
+{% endblock %}

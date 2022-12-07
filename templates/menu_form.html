@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">메뉴 정보 등록</h5>
+    <form method="post" class="post-form my-3" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        메뉴명 : 
+        <input name='food_name' type = 'text'>
+        <br><br>
+        가격 : 
+        <input name='price' type = 'number'>
+        <br><br>
+        <p>설명</p> 
+        <textarea name='food_explain' type = 'text' cols="40" rows="5"></textarea>
+        <br><br>
+        종류 : 
+        <input name='category' type = 'text'>
+        <br><br>
+        사진 : 
+        <input name='image' type = 'file'>
+        <br><br>
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+{% endblock %}

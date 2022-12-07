@@ -1,0 +1,143 @@
+{% extends "menu.html" %}
+{% load static %}
+
+
+{% comment %} {% block extrastyle %} {% static 'stylesheets/menu.css' %} {% endblock %} {% endcomment %}
+
+{% block menu %}
+
+
+  <body>
+        <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-justified">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'kiosk:menu1' %}">커피</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu2' %}">차</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu3' %}">음료</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu4' %}">디저트</a>
+          </li>
+      </ul>
+
+    <div class="container">
+            <!-- Tab panes -->
+      <div class="tab-content">
+      <div class="tab-pane active" id="커피">
+
+            <img class="rank1" src="{% static 'images/1.png' %}">
+            <img class="rank2" src="{% static 'images/2.png' %}">
+            <img class="rank3" src="{% static 'images/3.png' %}">
+
+        {% if coffee_category %}
+        {% for coffee in coffee_category%}
+        <a href = {% url 'kiosk:add_cart1' coffee.food_num %}>
+        {% comment %} <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">  {% endcomment %}
+                    <div class="list-box">
+                        <div class="card h-100" type="button" value='innerHTML' onclick='setInnerHTML()'>
+                            {% if coffee.image  %}
+                            <!-- Product image-->
+                                <img style="aspect-ratio: 4 / 3; object-fit: contain;" src="{{coffee.image.url}}" alt="" >
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'images/6c757d.png' %}" alt="..." />
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{coffee.food_name}}</h5>
+                                    <!-- Product price-->
+                                    <p class="fw-lighter">{{coffee.price}} 원</p>
+                                </div>
+
+                            </div>
+                            <!-- Product actions-->
+                        </div>
+                    
+                    </div>
+                {% comment %} </div>
+            </div>
+        </section> {% endcomment %}
+        </a>
+        
+        {% endfor %}
+
+        {% endif %}
+
+                        <!-- 커피 페이징처리 시작 -->
+                        <div class="paging">
+                            <ul class="pagination justify-content-center">
+                                <!-- 이전페이지 -->
+                                {% if coffee_category.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ coffee_category.previous_page_number }}">이전</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                                </li>
+                                {% endif %}
+                                <!-- 페이지리스트 -->
+                                {% for page_number in coffee_category.paginator.page_range %}
+                                {% if page_number == coffee_category.number %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                <!-- 다음페이지 -->
+                                {% if coffee_category.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ coffee_category.next_page_number }}">다음</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <!-- 페이징처리 끝 -->
+                        </div>
+      </div>
+      </div>
+
+    </div>
+  </body>
+
+  
+
+{% endblock %} 
+
+{% comment %} {%block order%}
+<div id="history">
+    <h4>주문내역</h4>
+    <div class = "order_context">
+      {%if cart_items %}
+      {%for cart_item in cart_items%}
+      <td>{{cart_item.food.food_name}}</td>
+      {%endfor%}
+      {%endif%}
+    </div>
+    <hr>
+    <div id='my_div'>
+          <span></span>
+    </div>
+    <!--<p>총 금액 : </p>-->
+    <div class="payment">
+<!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
+        <input class="btn btn-secondary btn-lg" type='button' value='전체 취소' onclick='refresh()' />
+        <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->
+        <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='주문 확인' />
+    </div>
+</div>
+{% endblock %} {% endcomment %}

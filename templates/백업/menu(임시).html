@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} menu {% endblock %}
+{% comment %} {% block extrastyle %} {% static 'stylesheets/menu.css' %} {% endblock %} {% endcomment %}
+
+{% block content %}
+<header>
+    <nav>
+        <div class="container1">
+            <a class="logo">
+                <span class="symbol"><img src="{% static 'images/logo-w.png' %}" alt="" /></span>
+            </a>
+            <a href="{% url 'kiosk:place' %}" class="home">
+                <img src="{% static 'images/home.png' %}" alt="" />
+            </a>
+        </div>
+    </nav>
+</header>
+<body>
+        <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'kiosk:menu1' %}">커피</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu2' %}">차</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu3' %}">음료</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'kiosk:menu4' %}">디저트</a>
+        </li>
+    </ul>
+    <div class="container">
+            <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="커피">
+            {% if coffee_category %}
+            {% for coffee in coffee_category%}
+                <div class="list-box">
+                    <div class="card h-100" type="button" value='innerHTML' onclick="addRow('{{coffee.food_name}}', '{{coffee.price}}')">
+                        {% if coffee.image  %}
+                        <!-- Product image-->
+                            <img style="aspect-ratio: 4 / 3; object-fit: contain;" src="{{coffee.image.url}}" alt="" >
+                        {% else %}
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        {% endif %}
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{coffee.food_name}}</h5>
+                                <!-- Product price-->
+                                <p class="fw-lighter">{{coffee.price}} 원</p>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% endif %}
+
+                            <!-- 커피 페이징처리 시작 -->
+                <div class="paging">
+                    <ul class="pagination justify-content-center">
+                        <!-- 이전페이지 -->
+                        {% if coffee_category.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ coffee_category.previous_page_number }}">이전</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                        {% endif %}
+                        <!-- 페이지리스트 -->
+                        {% for page_number in coffee_category.paginator.page_range %}
+                        {% if page_number == coffee_category.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- 다음페이지 -->
+                        {% if coffee_category.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ coffee_category.next_page_number }}">다음</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ah">
+        <div id="record">
+            <div id="wrap">
+                <main>
+                    <button class="mic">
+                    <img class="abc dictate" src="{% static 'images/mic_org.png' %}" />
+                    </button>
+                </main>
+                <div class="mic-text">
+                    <b>마이크를 누르고 </br>주문하실 메뉴를 말씀해주세요</b>
+                </div>
+            </div>
+            <div class="search">
+              <div class="input-bar">
+                <input
+                  type="hidden"
+                  placeholder="검색어를 입력하세요"
+                  autocomplete="off"
+                  id="search_kw"
+                  class="form-control"
+                  value ="{{kw|default_if_none:''}}"/>
+                <form id="searchForm" method="get" action="{% url 'kiosk:menulist' %}"> <!-- 값 전송-->
+                  <button class="submitbtn" type="submit" id="search">▶</button>
+                  <input type="hidden" id="kw" name="kw" value="{{kw|default_if_none:''}}">
+              </div>
+            </div>
+        </div>
+        <div id="history">
+            <h4>주문내역</h4><hr>
+            <table id='my_div' border="1">
+            </table>
+            <!--<p>총 금액 : </p>-->
+            <div class="payment">
+<!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
+                <input class="btn btn-secondary btn-lg" type='button' value='전체 취소' onclick='refresh()' />
+                <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->
+                <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='주문 확인' />
+            </div>
+        </div>
+        <div id="my_modal" class="pop_wrap" style="display:none;">
+            <p class="dsc">주문 확인</p><hr>
+            <div class="btns">
+                <a type="button" class="btn btn-secondary btn-lg btn_close" >닫기</a>
+                <a type="button" class="btn btn-success btn-lg pay-money">현금</a>
+                <a type="button" class="btn btn-primary btn-lg pay-card">카드</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/10-11.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    function addRow(food, price) {
+        const table = document.getElementById('my_div');
+
+        // 새 행(Row) 추가
+        const newRow = table.insertRow();
+
+        // 새 행(Row)에 Cell 추가
+        const newCell1 = newRow.insertCell(0);
+        const newCell2 = newRow.insertCell(1);
+        const newCell3 = newRow.insertCell(2);
+        const newCell4 = newRow.insertCell(3);
+
+        // Cell에 텍스트 추가
+        newCell1.innerHTML += food;
+        newCell2.innerHTML += '<form id="frm" action="action.jsp"><div><input type="number" id="usernumber" name="usernumber" value="1" step="1" min="1" max="100"></div></form>'
+        newCell3.innerHTML += price + '원';
+        newCell4.innerHTML += '<button onclick = "deleteRow(this)" class="dsc" id="delete">삭제</button>';
+        //<input type="hidden" name ='my_div'/>
+    }
+     function deleteRow(obj) {
+
+       // table element 찾기
+       // const table = document.getElementById('my_div');
+
+        // 행(Row) 삭제
+       // const newRow = table.deleteRow(rownum);
+        var tr = obj.parentNode.parentNode;
+        tr.parentNode.removeChild(tr);
+     }
+</script>
+{% endblock %} 

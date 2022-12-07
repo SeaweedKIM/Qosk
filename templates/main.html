@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% comment %} {% block extrastyle %} {% static 'stylesheets/main.css' %} {% endblock %} {% endcomment %}
+{% block title %} main {% endblock %}
+
+{% block content %}
+<div id="cover">
+    <div id="coverimg">
+        <a href="/place"><img style="background-image; height:600px;" src="{% static 'images/표지.jpg' %}" alt="" ></a>
+    </div>
+</div>
+<script>
+    let spinner = document.getElementById('spinner');
+    spinner.style.visibility = 'visible';
+</script>
+{% endblock %}
