@@ -29,9 +29,11 @@
             <!-- Tab panes -->
       <div class="tab-content">
       <div class="tab-pane active" id="디저트">
-        <img class="rank1" src="{% static 'images/1.png' %}">
-        <img class="rank2" src="{% static 'images/2.png' %}">
-        <img class="rank3" src="{% static 'images/3.png' %}">
+        {%if page == '1'%}
+            <img class="rank1" src="{% static 'images/1.png' %}">
+            <img class="rank2" src="{% static 'images/2.png' %}">
+            <img class="rank3" src="{% static 'images/3.png' %}">
+        {%endif%}
         {% if dessert_category %}
         {% for dessert in dessert_category%}
         <a href = {% url 'kiosk:add_cart4' dessert.food_num %}>

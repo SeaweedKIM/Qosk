@@ -92,6 +92,7 @@ def Menu1(request, total=0, counter=0, cart_items = None):
         'cart_items': cart_items,
         'total':total,
         'counter':counter,
+        'page':page
         }
     return render(request, 'menu1.html', context)
 
@@ -161,7 +162,8 @@ def Menu2(request, total=0, counter=0, cart_items = None):
         'q':q,
         'cart_items': cart_items,
         'total':total,
-        'counter':counter
+        'counter':counter,
+        'page':page
         }
     return render(request, 'menu2.html', context)
 
@@ -230,7 +232,8 @@ def Menu3(request, total=0, counter=0, cart_items = None):
         'q':q,
         'cart_items': cart_items,
         'total':total,
-        'counter':counter
+        'counter':counter,
+        'page':page
         }
     return render(request, 'menu3.html', context)
 
@@ -298,7 +301,8 @@ def Menu4(request, total=0, counter=0, cart_items = None):
         'q':q,
         'cart_items': cart_items,
         'total':total,
-        'counter':counter
+        'counter':counter,
+        'page':page
         }
     return render(request, 'menu4.html', context)
 
