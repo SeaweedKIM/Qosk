@@ -6,13 +6,16 @@ from django.conf.urls.static import static
 app_name = 'kiosk'
 
 urlpatterns = [
-    path('', views.Main, name='main'),
+
+    # 존재하지만 안 쓰는 페이지들 ~~
+    # path('', views.Main, name='main'),
     path('place/', views.Place, name='place'),
     path('face/', views.Face, name='face'),
     path('face/load/', views.Load, name='load'),
+
     # path('menu/', views.Menu, name='menu'),
 
-    path('menu1/', views.Menu1, name='menu1'),
+    path('', views.Menu1, name='menu1'),
     path('menu2/', views.Menu2, name='menu2'),
     path('menu3/', views.Menu3, name='menu3'),
     path('menu4/', views.Menu4, name='menu4'),

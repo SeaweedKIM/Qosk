@@ -263,22 +263,20 @@ main {
 
     }*/
 
-    /* #my_div {
-        position: absolute;
-        top: 13%;
-        width: 100%;
-        font-size: 26px;
-    } */
-
-    #history hr {
-       position: relative;
-       top: 235px;
+    #my_div {
+        max-height: 100px;
     }
+
+    /* #history hr {
+        display: felx;
+        position: relative;
+        top: 235px;
+    } */
 
     @media (min-width: 1900px) {
         #history hr {
-           position: relative;
-           top: 370px;
+            position: relative;
+            top: 370px;
         }
     }
 
@@ -291,9 +289,10 @@ main {
 
 
 .payment {
+    width: 100%;
     position: absolute;
     bottom: 8px;
-    right: 15px;
+    /* right: 15px; */
 }
 
 *{margin:0; padding:0;}
@@ -423,11 +422,11 @@ a{text-decoration:none; color:#333;}
 
 
 
-.tab-pane container active{
+.tab-pane container active {
     display: flex;
 }
 
-.paging{
+.paging {
     position: relative;
     right: 30px;
 }
@@ -439,7 +438,8 @@ a{text-decoration:none; color:#333;}
 }*/
 
 
-.total{
-    font-size: 2rem;
-    
+.total {
+    font-size: 1.5rem;
+    text-align: right;
+    padding-right: 10px;
 }
