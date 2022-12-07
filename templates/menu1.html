@@ -1,40 +1,11 @@
-{% extends "base.html" %}
+{% extends "menu.html" %}
 {% load static %}
-
-{% block title %} menu {% endblock %}
-
-{% comment %} {% extends "menu.html" %}
-{% load static %}
-
-{% block menu %} {% endcomment %}
-
-
 
 
 
 {% comment %} {% block extrastyle %} {% static 'stylesheets/menu.css' %} {% endblock %} {% endcomment %}
-{% block content %}
-    <header>
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-        <nav>
-            <div class="container1">
-
-                    <a class="logo">
-                        <span class="symbol"><img src="{% static 'images/logo.png' %}" alt="" /></span>
-                    </a>
-
-                    <a href="{% url 'kiosk:place' %}" class="home">
-                        <img src="{% static 'images/home.png' %}" alt="" />
-                    </a>
-            </div>
-        </nav>
-    </header>
-
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block menu %}
 
   <body>
         <!-- Nav tabs -->
@@ -65,7 +36,7 @@
         {%endif%}
         {% if coffee_category %}
         {% for coffee in coffee_category%}
-        <a href = {% url 'kiosk:add_cart1' coffee.food_num %}>
+        <a href = {% url 'kiosk:add_cart' coffee.food_num %}>
         {% comment %} <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">  {% endcomment %}
@@ -143,93 +114,6 @@
 
     </div>
   </body>
-
-  
-
-    <!--            {% comment %} <button type="button" class="btn btn-secondary btn-lg prev">이전</button>
-                <button type="button" class="btn btn-secondary btn-lg next">다음</button> {% endcomment %}-->
-                <div class="ah">
-                    <div class="search">
-                      <div class="input-bar">
-                          <input type="text" placeholder="마이크 클릭후 음성으로 검색어 입력" autocomplete="off">
-                          <button class="dictate">
-                              <img class="mic ic-mike" src="{% static 'images/mic.png' %}" />
-                              <svg width="1.25rem" height="1.25rem" viewBox="0 0 100 100">
-                                  <g stroke="#fff" stroke-width="15">
-                                      <path d="M20,20 20,80">
-                                          <animate attributeName="d" values="M20,40 20,60;M20,20 20,80;M20,40 20,60" dur="1s" repeatCount="indefinite" />
-                                      </path>
-                                      <path d="M50,10 50,90">
-                                          <animate attributeName="d" values="M50,10 50,90;M50,40 50,60;M50,10 50,90" dur="1s" repeatCount="indefinite" />
-                                      </path>
-                                      <path d="M80,20 80,80">
-                                          <animate attributeName="d" values="M80,40 80,60;M80,20 80,80;M80,40 80,60" dur="1s" repeatCount="indefinite" />
-                                      </path>
-                                  </g>
-                              </svg>
-                          </button>
-                      </div>
-                  </div>
-              
-          
-                      <div id="history">
-                          <h4>주문내역</h4>
-                          <table class="my_div" border=1 frame="void">
-                            {%if cart_items %}
-          
-                              {%for cart_item in cart_items%}
-                              <tr class="order_tr">
-                                <td style='width: 30%;'> {{cart_item.food.food_name}}</td>
-                                <td style='width: 20%;'>
-                                  <a href="{% url 'kiosk:add_cart1' cart_item.food.food_num %}" class="custom_a"><img width="20" src="{% static 'images/plus_icon.png' %}" /></a>
-                                  수량 : {{cart_item.quantity}}
-                                  <a href="{% url 'kiosk:remove_cart1' cart_item.food.food_num %}" class="custom_a"><img width="20" src="{% static 'images/minus_icon.png' %}" /></a>
-                              </td>
-                                <td style='width: 20%;'>가격 : {{cart_item.sub_total}} 원</td>
-                              </tr>
-                              {%endfor%}
-          
-                            {%endif%}
-                          </table>
-                          <hr>
-                          <!--<p>총 금액 : </p>-->
-                          <div class="payment">
-                            <tr>
-                            <td class = "total">
-                                총 가격: <strong> {{total}} 원 </strong>
-                            </td>
-                            </tr>
-              <!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
-                              <input class="btn btn-secondary btn-lg" type='button' value='전체 취소' onclick="window.location.href='{% url 'kiosk:clear_cart1' %}'" />
-                              <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->
-                              <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='주문 확인' />
-                          </div>
-                      </div>
-                      
-              
-              
-              <!--        <div id="my_modal">
-                          <a class="modal_close_btn">닫기</a>
-                      </div>-->
-              
-                      <div id="my_modal" class="pop_wrap" style="display:none;">
-                          <p class="dsc">주문 확인</p><hr>
-                          <div class="btns">
-                              <a type="button" class="btn btn-secondary btn-lg btn_close" >닫기</a>
-                              <a type="button" class="btn btn-success btn-lg pay-money">현금</a>
-                              <a type="button" class="btn btn-primary btn-lg pay-card">카드</a>
-                          </div>
-                      </div>
-                  </div>
-              
-              
-                      <!-- Footer-->
-                      <!--footer class="py-5 bg-dark"-->
-              <!--            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
-                      </footer>-->
-                      <!-- Core theme -->
-                      <script src="{% static 'js/scripts.js' %}"></script>
-                      <script src="{% static 'js/10-11.js' %}"></script>
           
                       
           {% endblock %}

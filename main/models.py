@@ -28,9 +28,9 @@ class List(models.Model):
     #         return self.image.url
 
 
-class Bill(models.Model):
-    order_num = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    menu_num = models.ForeignKey(List, on_delete=models.CASCADE)
+# class Bill(models.Model):
+#     order_num = models.ForeignKey(Customer, on_delete=models.CASCADE)
+#     menu_num = models.ForeignKey(List, on_delete=models.CASCADE)
 
 
 class Favor(models.Model):

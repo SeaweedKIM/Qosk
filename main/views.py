@@ -11,6 +11,8 @@ from django.db.models import Q
 from .forms import Menuform
 from django.http import HttpResponse
 
+from django.http import HttpResponseRedirect
+
 def Main(request):
     return render(request, 'main.html')
 
@@ -38,6 +40,7 @@ def Menu1(request, total=0, counter=0, cart_items = None):
     # below is coded by Young Kim
     page= request.GET.get('page', '1')  # 페이지
     age_and_gender = request.GET.get('age_and_gender', '1')
+
     preference = []
     if age_and_gender == '1':
         # male 20
@@ -108,40 +111,40 @@ def Menu2(request, total=0, counter=0, cart_items = None):
     preference = []
     if age_and_gender == '1':
         # male 20
-        preference=[2,3,7,4,0,5,1,6,8]
+        preference=[2,3,7,4,0,5,1,6,]
     elif age_and_gender == '2':
         # male 30
-        preference=[1,4,5,7,0,3,2,8,6]
+        preference=[1,4,5,7,0,3,2,6]
     elif age_and_gender == '3':
         # male 40
-        preference=[0,1,5,6,8,4,2,7,3]
+        preference=[0,1,5,6,4,2,7,3]
     elif age_and_gender == '4':
         # male 50
-        preference=[3,2,1,6,8,5,4,7,0]
+        preference=[3,2,1,6,5,4,7,0]
     elif age_and_gender == '5':
         # male 60
-        preference=[3,4,5,7,8,2,1,6,0]
+        preference=[3,4,5,7,2,1,6,0]
     elif age_and_gender == '6':
         # male 70
-        preference=[1,2,3,7,8,5,4,6,0] 
+        preference=[1,2,3,7,5,4,6,0] 
     elif age_and_gender == '8':
         # female 20
-        preference=[5,4,8,3,2,0,1,7,6]
+        preference=[5,4,3,2,0,1,7,6]
     elif age_and_gender == '9':
         # female 30
-        preference=[2,4,8,3,5,0,1,7,6]
+        preference=[2,4,3,5,0,1,7,6]
     elif age_and_gender == '10':
         # female 40
-        preference=[0,1,6,5,8,4,2,7,3]
+        preference=[0,1,6,5,4,2,7,3]
     elif age_and_gender == '11':
         # female 50
-        preference=[2,4,6,5,8,3,1,7,0]
+        preference=[2,4,6,5,3,1,7,0]
     elif age_and_gender == '12':
         # female 60
-        preference=[1,3,6,2,8,5,4,7,0]
+        preference=[1,3,6,2,5,4,7,0]
     elif age_and_gender == '13':
         # female 70
-        preference=[2,4,6,5,8,3,1,7,0]
+        preference=[2,4,6,5,3,1,7,0]
 
     tea_category = [tea_category[i] for i in preference]
 
@@ -470,24 +473,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # 추가, 수량, 가격 조회 기능 ---------------
 
-def add_cart1(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-    
-    return redirect('kiosk:menu1')
-    # return render(request, 'menu1.html', {'cart_items':cart_items})
 
-
-def add_cart2(request, food_id):
+def add_cart(request, food_id):
     food = get_object_or_404(List, pk=food_id)
     try:
         cart_item = CartItem.objects.get(food = food)
@@ -502,41 +489,7 @@ def add_cart2(request, food_id):
 
     # cart_items = CartItem.objects.filter(active=True)
     
-    return redirect('kiosk:menu2')
-
-def add_cart3(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-
-    # cart_items = CartItem.objects.filter(active=True)
-    
-    return redirect('kiosk:menu3')
-
-def add_cart4(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-
-    # cart_items = CartItem.objects.filter(active=True)
-    
-    return redirect('kiosk:menu4')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # def Cart(request, total=0, counter=0, cart_items = None):
@@ -602,7 +555,8 @@ def add_cart4(request, food_id):
 
 # 제거 기능 -------------------
 
-def remove_cart1(request, food_id):
+
+def remove_cart(request, food_id):
     food = get_object_or_404(List, pk=food_id)
     cart_item = CartItem.objects.get(food = food)
     if cart_item.quantity >1:
@@ -611,11 +565,14 @@ def remove_cart1(request, food_id):
     else:
         cart_item.delete()
     
-    return redirect('kiosk:menu1')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # 전체 삭제 기능 -----------------
-def clear1(request):
+
+
+
+def clear(request):
     cart_item = CartItem.objects.all()
     cart_item.delete()
-    return redirect('kiosk:menu1')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

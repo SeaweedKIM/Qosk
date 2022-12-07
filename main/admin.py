@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, List, Bill, Favor, CartItem
+from .models import Customer, List, Favor, CartItem
 
 # Register your models here.
 
@@ -23,7 +23,7 @@ class MenuAdmin(admin.ModelAdmin):
 admin.site.register(List, MenuAdmin)
 
 
-admin.site.register(Bill)
+# admin.site.register(Bill)
 
 admin.site.register(Favor)
 
