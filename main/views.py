@@ -11,6 +11,8 @@ from django.db.models import Q
 from .forms import Menuform
 from django.http import HttpResponse
 
+from django.http import HttpResponseRedirect
+
 def Main(request):
     return render(request, 'main.html')
 
@@ -38,6 +40,7 @@ def Menu1(request, total=0, counter=0, cart_items = None):
     # below is coded by Young Kim
     page= request.GET.get('page', '1')  # 페이지
     age_and_gender = request.GET.get('age_and_gender', '1')
+
     preference = []
     if age_and_gender == '1':
         # male 20
@@ -470,24 +473,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # 추가, 수량, 가격 조회 기능 ---------------
 
-def add_cart1(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-    
-    return redirect('kiosk:menu1')
-    # return render(request, 'menu1.html', {'cart_items':cart_items})
 
-
-def add_cart2(request, food_id):
+def add_cart(request, food_id):
     food = get_object_or_404(List, pk=food_id)
     try:
         cart_item = CartItem.objects.get(food = food)
@@ -502,41 +489,7 @@ def add_cart2(request, food_id):
 
     # cart_items = CartItem.objects.filter(active=True)
     
-    return redirect('kiosk:menu2')
-
-def add_cart3(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-
-    # cart_items = CartItem.objects.filter(active=True)
-    
-    return redirect('kiosk:menu3')
-
-def add_cart4(request, food_id):
-    food = get_object_or_404(List, pk=food_id)
-    try:
-        cart_item = CartItem.objects.get(food = food)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:   # 기본 값
-        cart_item = CartItem.objects.create(
-            food = food,
-            quantity = 1,
-        )
-        cart_item.save()
-
-    # cart_items = CartItem.objects.filter(active=True)
-    
-    return redirect('kiosk:menu4')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # def Cart(request, total=0, counter=0, cart_items = None):
@@ -602,7 +555,8 @@ def add_cart4(request, food_id):
 
 # 제거 기능 -------------------
 
-def remove_cart1(request, food_id):
+
+def remove_cart(request, food_id):
     food = get_object_or_404(List, pk=food_id)
     cart_item = CartItem.objects.get(food = food)
     if cart_item.quantity >1:
@@ -611,11 +565,14 @@ def remove_cart1(request, food_id):
     else:
         cart_item.delete()
     
-    return redirect('kiosk:menu1')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # 전체 삭제 기능 -----------------
-def clear1(request):
+
+
+
+def clear(request):
     cart_item = CartItem.objects.all()
     cart_item.delete()
-    return redirect('kiosk:menu1')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

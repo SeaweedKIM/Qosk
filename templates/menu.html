@@ -67,9 +67,9 @@
                     <tr class="order_tr">
                       <td style='width: 30%;'> {{cart_item.food.food_name}}</td>
                       <td style='width: 20%;'>
-                        <a href="" class="custom_a"><i class="fa fa-plus-circle"></i></a>
+                        <a href="{% url 'kiosk:add_cart' cart_item.food.food_num %}" class="custom_a"><img width="20" src="{% static 'images/plus_icon.png' %}" /></a>
                         수량 : {{cart_item.quantity}}
-                        <a href="" class="custom_a"><i class="fas fa-minus-circle"></i></a>
+                        <a href="{% url 'kiosk:remove_cart' cart_item.food.food_num %}" class="custom_a"><img width="20" src="{% static 'images/minus_icon.png' %}" /></a>
                     </td>
                       <td style='width: 20%;'>가격 : {{cart_item.sub_total}} 원</td>
                     </tr>
@@ -81,7 +81,7 @@
                 <!--<p>총 금액 : </p>-->
                 <div class="payment">
     <!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
-                    <input class="btn btn-secondary btn-lg" type='button' value='전체 취소' onclick='refresh()' />
+                    <input class="btn btn-secondary btn-lg" type='button' value='전체 취소'onclick="window.location.href='{% url 'kiosk:clear_cart' %}'" />
                     <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->
                     <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='주문 확인' />
                 </div>
