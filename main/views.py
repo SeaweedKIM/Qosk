@@ -75,7 +75,6 @@ def Menu1(request, total=0, counter=0, cart_items = None):
     elif age_and_gender == '13':
         # female 70
         preference=[9,0,1,2,5,4,6,3,8,7]
-
     coffee_category = [coffee_category[i] for i in preference]
 
 
@@ -169,53 +168,55 @@ def Menu2(request, total=0, counter=0, cart_items = None):
 
 def Menu3(request, total=0, counter=0, cart_items = None):
     q = List.objects.values_list('category', flat=True).distinct()
+
+    beverage_category = List.objects.filter(category='음료')
+
         # below is coded by Young Kim
     page= request.GET.get('page', '1')  # 페이지
     age_and_gender = request.GET.get('age_and_gender', '1')
     preference = []
     if age_and_gender == '1':
         # male 20
-        preference=[8,12,9,15,5,3,0,2,1,6,4,18,14,10,16,13,17,11,7]
+        preference=[8,12,9,15,5,3,0,2,1,6,4,14,10,16,13,11,7]
     elif age_and_gender == '2':
         # male 30
-        preference=[6,11,8,16,7,3,0,1,2,5,4,18,13,9,15,14,17,12,10]
+        preference=[6,11,8,16,7,3,0,1,2,5,4,13,9,15,14,12,10]
     elif age_and_gender == '3':
         # male 40
-        preference=[1,12,7,11,8,5,4,2,3,0,6,15,10,9,13,17,18,14,16]
+        preference=[1,12,7,11,8,5,4,2,3,0,6,15,10,9,13,14,16]
     elif age_and_gender == '4':
         # male 50
-        preference=[1,11,10,14,8,6,2,7,5,0,3,9,4,12,13,15,18,16,17]
+        preference=[1,11,10,14,8,6,2,7,5,0,3,9,4,12,13,15,16]
     elif age_and_gender == '5':
         # male 60
-        preference=[0,8,7,11,13,12,9,10,14,1,2,3,5,4,6,16,18,17,15]
+        preference=[0,8,7,11,13,12,9,10,14,1,2,3,5,4,6,16,15]
     elif age_and_gender == '6':
         # male 70
-        preference=[0,8,7,12,13,11,10,9,14,1,3,2,5,6,4,17,18,15,16] 
+        preference=[0,8,7,12,13,11,10,9,14,1,3,2,5,6,4,15,16] 
     elif age_and_gender == '8':
         # female 20
-        preference=[4,8,9,16,7,3,1,2,0,6,5,14,13,10,11,15,18,17,12]
+        preference=[4,8,9,16,7,3,1,2,0,6,5,14,13,10,11,15,12]
     elif age_and_gender == '9':
         # female 30
-        preference=[2,12,11,13,7,4,0,3,1,6,5,14,9,8,10,17,16,18,15]
+        preference=[2,12,11,13,7,4,0,3,1,6,5,14,9,8,10,16,15]
     elif age_and_gender == '10':
         # female 40
-        preference=[0,13,12,15,10,9,5,1,4,3,2,11,8,6,7,16,14,18,17]
+        preference=[0,13,12,15,10,9,5,1,4,3,2,11,8,6,7,16,14]
     elif age_and_gender == '11':
         # female 50
-        preference=[0,14,12,13,11,9,7,4,10,8,1,5,3,2,6,16,15,18,17]
+        preference=[0,14,12,13,11,9,7,4,10,8,1,5,3,2,6,16,15]
     elif age_and_gender == '12':
         # female 60
-        preference=[0,8,7,14,11,9,10,12,13,3,2,4,5,1,6,15,16,17,18]
+        preference=[0,8,7,14,11,9,10,12,13,3,2,4,5,1,6,15,16]
     elif age_and_gender == '13':
         # female 70
-        preference=[0,8,7,10,14,13,9,15,12,2,3,1,5,4,6,16,11,17,18]
+        preference=[0,8,7,10,14,13,9,15,12,2,3,1,5,4,6,16,11]
 
     beverage_category = [beverage_category[i] for i in preference]
 
 
     # above is coded by Young Kim
 
-    beverage_category = List.objects.filter(category='음료')
     beverage_paginator = Paginator(beverage_category, 6)  # 페이지당 n개씩 보여주기
     beverage_page_obj = beverage_paginator.get_page(page)
 
@@ -236,6 +237,7 @@ def Menu3(request, total=0, counter=0, cart_items = None):
 
 def Menu4(request, total=0, counter=0, cart_items = None):
     q = List.objects.values_list('category', flat=True).distinct()
+    dessert_category = List.objects.filter(category='디저트')
 
     # below is coded by Young Kim
     page= request.GET.get('page', '1')  # 페이지
@@ -243,47 +245,46 @@ def Menu4(request, total=0, counter=0, cart_items = None):
     preference = []
     if age_and_gender == '1':
         # male 20
-        preference=[10,12,9,7,6,5,8,3,0,2,1,4,11,15,14,13]
+        preference=[9,7,6,5,8,3,0,2,1,4]
     elif age_and_gender == '2':
         # male 30
-        preference=[9,10,8,11,7,6,4,2,0,3,1,5,13,15,14,12]
+        preference=[9,8,7,6,4,2,0,3,1,5]
     elif age_and_gender == '3':
         # male 40
-        preference=[13,14,8,6,10,5,7,4,0,2,1,3,9,15,12,11]
+        preference=[8,6,5,7,4,0,2,1,3,9]
     elif age_and_gender == '4':
         # male 50
-        preference=[14,10,7,8,11,5,6,3,0,2,1,4,9,15,13,12]
+        preference=[7,8,5,6,3,0,2,1,4,9]
     elif age_and_gender == '5':
         # male 60
-        preference=[15,14,11,6,7,3,8,5,0,4,1,2,9,13,10,12]
+        preference=[6,7,3,8,5,0,4,1,2,9]
     elif age_and_gender == '6':
         # male 70
-        preference=[15,14,11,3,8,6,2,10,0,7,1,4,5,9,12,13] 
+        preference=[3,8,6,2,0,7,1,4,5,9] 
     elif age_and_gender == '8':
         # female 20
-        preference=[9,7,13,8,12,5,10,4,0,2,1,3,6,15,14,11]
+        preference=[9,7,8,5,4,0,2,1,3,6]
     elif age_and_gender == '9':
         # female 30
-        preference=[10,7,14,8,0,6,12,2,0,3,1,4,5,15,13,9]
+        preference=[7,8,0,6,2,3,1,4,5,9]
     elif age_and_gender == '10':
         # female 40
-        preference=[11,8,12,7,14,6,10,4,0,2,1,3,5,15,13,9]
+        preference=[8,7,6,4,0,2,1,3,5,9]
     elif age_and_gender == '11':
         # female 50
-        preference=[15,10,12,6,9,7,13,4,0,3,1,2,5,14,11,8]
+        preference=[6,9,7,4,0,3,1,2,5,8]
     elif age_and_gender == '12':
         # female 60
-        preference=[14,15,3,11,5,4,12,8,0,2,1,7,6,10,13,9]
+        preference=[3,5,4,8,0,2,1,7,6,9]
     elif age_and_gender == '13':
         # female 70
-        preference=[13,15,6,10,7,4,14,8,0,2,1,5,3,11,9,12]
+        preference=[6,7,4,8,0,2,1,5,3,9,]
 
     dessert_category = [dessert_category[i] for i in preference]
 
 
     # above is coded by Young Kim
 
-    dessert_category = List.objects.filter(category='디저트')
     dessert_paginator = Paginator(dessert_category, 6)  # 페이지당 n개씩 보여주기
     dessert_page_obj = dessert_paginator.get_page(page)
 
