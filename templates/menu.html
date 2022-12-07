@@ -80,6 +80,11 @@
                 <hr>
                 <!--<p>총 금액 : </p>-->
                 <div class="payment">
+                <div class="total">
+                    <tr>
+                        <td> 총 가격 : <strong>{{total}}</strong> 원 </td>
+                    </tr>
+                </div>
     <!--                <button class="btn btn-secondary btn-lg" type="button" disabled>전체 취소</button>-->
                     <input class="btn btn-secondary btn-lg" type='button' value='전체 취소'onclick="window.location.href='{% url 'kiosk:clear_cart' %}'" />
                     <!--button class="btn btn-success btn-lg" type="button">주문 확인</button-->

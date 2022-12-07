@@ -111,40 +111,40 @@ def Menu2(request, total=0, counter=0, cart_items = None):
     preference = []
     if age_and_gender == '1':
         # male 20
-        preference=[2,3,7,4,0,5,1,6,8]
+        preference=[2,3,7,4,0,5,1,6,]
     elif age_and_gender == '2':
         # male 30
-        preference=[1,4,5,7,0,3,2,8,6]
+        preference=[1,4,5,7,0,3,2,6]
     elif age_and_gender == '3':
         # male 40
-        preference=[0,1,5,6,8,4,2,7,3]
+        preference=[0,1,5,6,4,2,7,3]
     elif age_and_gender == '4':
         # male 50
-        preference=[3,2,1,6,8,5,4,7,0]
+        preference=[3,2,1,6,5,4,7,0]
     elif age_and_gender == '5':
         # male 60
-        preference=[3,4,5,7,8,2,1,6,0]
+        preference=[3,4,5,7,2,1,6,0]
     elif age_and_gender == '6':
         # male 70
-        preference=[1,2,3,7,8,5,4,6,0] 
+        preference=[1,2,3,7,5,4,6,0] 
     elif age_and_gender == '8':
         # female 20
-        preference=[5,4,8,3,2,0,1,7,6]
+        preference=[5,4,3,2,0,1,7,6]
     elif age_and_gender == '9':
         # female 30
-        preference=[2,4,8,3,5,0,1,7,6]
+        preference=[2,4,3,5,0,1,7,6]
     elif age_and_gender == '10':
         # female 40
-        preference=[0,1,6,5,8,4,2,7,3]
+        preference=[0,1,6,5,4,2,7,3]
     elif age_and_gender == '11':
         # female 50
-        preference=[2,4,6,5,8,3,1,7,0]
+        preference=[2,4,6,5,3,1,7,0]
     elif age_and_gender == '12':
         # female 60
-        preference=[1,3,6,2,8,5,4,7,0]
+        preference=[1,3,6,2,5,4,7,0]
     elif age_and_gender == '13':
         # female 70
-        preference=[2,4,6,5,8,3,1,7,0]
+        preference=[2,4,6,5,3,1,7,0]
 
     tea_category = [tea_category[i] for i in preference]
 
