@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, List, Favor, CartItem
+from .models import Customer, List, CartItem
 
 # Register your models here.
 
@@ -24,8 +24,6 @@ admin.site.register(List, MenuAdmin)
 
 
 # admin.site.register(Bill)
-
-admin.site.register(Favor)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['food', 'quantity']
