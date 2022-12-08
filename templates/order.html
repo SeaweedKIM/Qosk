@@ -1,48 +1,68 @@
+{% extends "base.html" %}
 {% load static %}
-<link href="{% static 'stylesheets/popup.css' %}" rel="stylesheet" />
-
-<a href="javascript:openPop()">
-    <div>
-        팝업오픈!
-    </div>
-</a>
 
 
-<div class="popup_layer" id="popup_layer" style="display: none;">
-    <div class="popup_box">
-        {% comment %} <div style="height: 5px; width: 370px; float: top;">
-          <a href="javascript:closePop();"><img src="/static/img/ic_close.svg" class="m_header-banner-close" width="30px" height="30px"></a>
-        </div> {% endcomment %}
+{% block title %} order {% endblock %}
 
-        <!--팝업 컨텐츠 영역-->
-        <div class="popup_cont">
-            <div class="text"><h1> 식사하실 장소를 선택해주세요 </h1> </div>
-            <p>
-                <div class="btn">
-                    <a href="#" class="store"><img width="200" src="{% static 'images/store.PNG' %}" alt="" /></a>
-                    <a href="#" class="takeout"><img width="200" src="{% static 'images/takeout.PNG' %}" alt="" /></a>
+{% block content %}
+    <header>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <nav>
+            <div class="container1">
+
+                    <a class="logo">
+                        <span class="symbol"><img src="{% static 'images/logo.png' %}" alt="" /></span>
+                    </a>
+
+                    <a href="{% url 'kiosk:home' %}" class="home">
+                        <img src="{% static 'images/home.png' %}" alt="" />
+                    </a>
+            </div>
+        </nav>
+    </header>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block order %}{% endblock %}
+    <div id="oh">
+        <div id="order_history">
+            <h4><strong>키오스크</strong>주문내역</h4>
+            <div class="order">
+                {%if cart_items %}
+                    {%for cart_item in cart_items%}
+                        <tr class="order_tr">
+                        <td style='width: 40%;'> {{cart_item.food.food_name}}</td>
+                            <td style='width: 20%;'>
+                               수량 : {{cart_item.quantity}}
+                            </td>
+                        <td style='width: 23%;'>가격 : {{cart_item.sub_total}} 원</td>
+                        </tr>
+                        <br>
+                    {%endfor%}
+                {%endif%}
+
+                <!--<p>총 금액 : </p>-->
+                <div class="amount">
+                    <div class="total">
+                        <tr>
+                            <td> 결제 금액 | </td>
+                            <td> <strong>{{total}} 원</strong> </td>
+                            <td> 총 수량 | </td>
+                            <td> <strong>{{counter}} 개</strong> </td>
+                        </tr>
+                        <!--input class="btn btn-secondary btn-lg" type='button' value='전체 취소'onclick="window.location.href='{% url 'kiosk:clear_cart' %}'" />
+                        <input id="popup_open_btn" class="btn btn-success btn-lg" type="button" value='다음' /-->
+                    </div>
                 </div>
-            </p>
+            </div>
         </div>
-        <!--팝업 버튼 영역-->
-        <div class="popup_btn" style="float: bottom; margin-top:5px;">
-            <a href="javascript:closePop();">취소</a>
+        <div class="pay">
+            <span type="button" href="#" class="cash"><img style="width: 250px;" src="{% static 'images/cash.PNG' %}" alt="" /></span>
+            <span type="button" href="#" class="crd"><img style="width: 250px;" src="{% static 'images/card.PNG' %}" alt="" /></span>
         </div>
     </div>
-  </div>
-
-
-
-
-<script>
-    //팝업 띄우기
-function openPop() {
-    document.getElementById("popup_layer").style.display = "block";
-
-}
-
-//팝업 닫기
-function closePop() {
-    document.getElementById("popup_layer").style.display = "none";
-}
-</script>
+{% endblock %}

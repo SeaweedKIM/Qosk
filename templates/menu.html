@@ -108,8 +108,8 @@
                         {% comment %} <div class="text"><h1> 장소 선택 </h1> </div> {% endcomment %}
                         <p>
                             <div class="btn">
-                                <a href="#" class="store"><img width="300" src="{% static 'images/store.PNG' %}" alt="" /></a>
-                                <a href="#" class="takeout"><img width="300" src="{% static 'images/takeout.PNG' %}" alt="" /></a>
+                                <a href="{% url 'kiosk:order' %}" class="store"><img width="300" src="{% static 'images/store.PNG' %}" alt="" /></a>
+                                <a href="{% url 'kiosk:order' %}" class="takeout"><img width="300" src="{% static 'images/takeout.PNG' %}" alt="" /></a>
                             </div>
                         </p>
                     </div>

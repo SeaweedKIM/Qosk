@@ -351,8 +351,18 @@ def Menu4(request, total=0, counter=0, cart_items = None):
 # ----------------------------------------------------------
 
 
-def Order(request):
-    return render(request, 'order.html')
+def Order(request, total=0, counter=0):
+    cart_items = CartItem.objects.filter(active=True)
+    for cart_item in cart_items:
+        total += (cart_item.food.price * cart_item.quantity)
+        counter += cart_item.quantity
+
+    context = {
+        'cart_items': cart_items,
+        'total':total,
+        'counter':counter,
+        }
+    return render(request, 'order.html', context)
 
 
 def Kitchen(request):
@@ -589,3 +599,9 @@ def clear(request):
     cart_item = CartItem.objects.all()
     cart_item.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def home(request):
+    cart_item = CartItem.objects.all()
+    cart_item.delete()
+    return redirect('kiosk:menu1')
