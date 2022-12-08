@@ -18,9 +18,11 @@
                         <span class="symbol"><img src="{% static 'images/logo.png' %}" alt="" /></span>
                     </a>
 
-                    <a href="{% url 'kiosk:place' %}" class="home">
+                    <!-- 첫페이지로 돌아가는 버튼(비활성화)-->
+                    {% comment %} <a href="{% url 'kiosk:place' %}" class="home">
                         <img src="{% static 'images/home.png' %}" alt="" />
-                    </a>
+                    </a> {% endcomment %}
+
             </div>
         </nav>
     </header>
@@ -85,6 +87,7 @@
                 <div class="payment"><hr>
                 <div class="total">
                     <tr>
+                        <td> 총 수량 : <strong>{{counter}}</strong> 개 </td>&nbsp; /&nbsp;
                         <td> 총 가격 : <strong>{{total}}</strong> 원 </td>
                     </tr>
                     <input class="btn btn-secondary btn-lg" type='button' value='전체 취소'onclick="window.location.href='{% url 'kiosk:clear_cart' %}'" />
