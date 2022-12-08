@@ -2,13 +2,13 @@ from django.db import models
 
 
 # Create your models here.
-class Customer(models.Model):
-    order_num = models.BigAutoField(primary_key=True)
-    date = models.DateTimeField(auto_now_add=True, null=False)
-    gender = models.CharField(max_length=50, blank=True)
-    age_group = models.CharField(max_length=255, blank=True)
-    total_num = models.IntegerField(default=0, null=False)
-    total_price = models.IntegerField(default=0, null=False)
+# class Customer(models.Model):
+#     order_num = models.BigAutoField(primary_key=True)
+#     date = models.DateTimeField(auto_now_add=True, null=False)
+#     gender = models.CharField(max_length=50, blank=True)
+#     age_group = models.CharField(max_length=255, blank=True)
+#     total_num = models.IntegerField(default=0, null=False)
+#     total_price = models.IntegerField(default=0, null=False)
 
 
 class List(models.Model):

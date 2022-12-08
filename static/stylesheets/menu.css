@@ -504,3 +504,13 @@ a{text-decoration:none; color:#333;}
     bottom: 15px;
     text-align: right;
 }
+
+
+.order_tr ul{
+    padding: 10px 50px;
+}
+
+.order_tr hr {
+    margin: auto;
+    width: 90%;
+}
