@@ -42,38 +42,50 @@ def Menu1(request, total=0, counter=0, cart_items = None):
     if age_and_gender == '1':
         # male 20
         preference= List.objects.filter(category='커피').order_by( '-M20', 'food_name')
+        print = '20대 남성'
     elif age_and_gender == '2':
         preference= List.objects.filter(category='커피').order_by( '-M30', 'food_name')
+        print= "30대 남성"
     elif age_and_gender == '3':
         # male 40
         preference= List.objects.filter(category='커피').order_by( '-M40', 'food_name')
+        print= "40대 남성"
     elif age_and_gender == '4':
         # male 50
         preference= List.objects.filter(category='커피').order_by( '-M50', 'food_name')
+        print= "50대 남성"
     elif age_and_gender == '5':
         # male 60
         preference= List.objects.filter(category='커피').order_by( '-M60', 'food_name')
+        print= "60대 남성"
     elif age_and_gender == '6':
         # male 70
         preference= List.objects.filter(category='커피').order_by( '-M70', 'food_name')
+        print= "70대 남성"
     elif age_and_gender == '8':
         # female 20
         preference= List.objects.filter(category='커피').order_by( '-W20', 'food_name')
+        print= "20대 여성"
     elif age_and_gender == '9':
         # female 30
         preference= List.objects.filter(category='커피').order_by( '-W30', 'food_name')
+        print= "30대 여성"
     elif age_and_gender == '10':
         # female 40
         preference= List.objects.filter(category='커피').order_by( '-W40', 'food_name')
+        print= "40대 여성"
     elif age_and_gender == '11':
         # female 50
         preference= List.objects.filter(category='커피').order_by( '-W50', 'food_name')
+        print= "50대 여성"
     elif age_and_gender == '12':
         # female 60
         preference= List.objects.filter(category='커피').order_by( '-W60', 'food_name')
+        print= "60대 여성"
     elif age_and_gender == '13':
         # female 70
         preference= List.objects.filter(category='커피').order_by( '-W70', 'food_name')
+        print= "70대 여성"
 
 
     coffee_category = preference
@@ -93,7 +105,8 @@ def Menu1(request, total=0, counter=0, cart_items = None):
         'cart_items': cart_items,
         'total':total,
         'counter':counter,
-        'page':page
+        'page':page,
+        'print':print
         }
     return render(request, 'menu1.html', context)
 
@@ -108,39 +121,51 @@ def Menu2(request, total=0, counter=0, cart_items = None):
     if age_and_gender == '1':
         # male 20
         preference= List.objects.filter(category='차').order_by( '-M20', 'food_name')
+        print= "20대 남성"
     elif age_and_gender == '2':
         # male 30
         preference= List.objects.filter(category='차').order_by( '-M30', 'food_name')
+        print= "30대 남성"
     elif age_and_gender == '3':
         # male 40
         preference= List.objects.filter(category='차').order_by( '-M40', 'food_name')
+        print= "40대 남성"
     elif age_and_gender == '4':
         # male 50
         preference= List.objects.filter(category='차').order_by( '-M50', 'food_name')
+        print= "50대 남성"
     elif age_and_gender == '5':
         # male 60
         preference= List.objects.filter(category='차').order_by( '-M60', 'food_name')
+        print= "60대 남성"
     elif age_and_gender == '6':
         # male 70
         preference= List.objects.filter(category='차').order_by( '-M70', 'food_name')
+        print= "70대 남성"
     elif age_and_gender == '8':
         # female 20
         preference= List.objects.filter(category='차').order_by( '-W20', 'food_name')
+        print= "20대 여성"
     elif age_and_gender == '9':
         # female 30
         preference= List.objects.filter(category='차').order_by( '-W30', 'food_name')
+        print= "30대 여성"
     elif age_and_gender == '10':
         # female 40
         preference= List.objects.filter(category='차').order_by( '-W40', 'food_name')
+        print= "40대 여성"
     elif age_and_gender == '11':
         # female 50
         preference= List.objects.filter(category='차').order_by( '-W50', 'food_name')
+        print= "50대 여성"
     elif age_and_gender == '12':
         # female 60
         preference= List.objects.filter(category='차').order_by( '-W60', 'food_name')
+        print= "60대 여성"
     elif age_and_gender == '13':
         # female 70
         preference= List.objects.filter(category='차').order_by( '-W70', 'food_name')
+        print= "70대 여성"
 
     tea_category = preference
 
@@ -162,7 +187,8 @@ def Menu2(request, total=0, counter=0, cart_items = None):
         'cart_items': cart_items,
         'total':total,
         'counter':counter,
-        'page':page
+        'page':page,
+        'print':print
         }
     return render(request, 'menu2.html', context)
 
@@ -177,39 +203,51 @@ def Menu3(request, total=0, counter=0, cart_items = None):
     if age_and_gender == '1':
         # male 20
         preference= List.objects.filter(category='음료').order_by( '-M20', 'food_name')
+        print= "20대 남성"
     elif age_and_gender == '2':
         # male 30
         preference= List.objects.filter(category='음료').order_by( '-M30', 'food_name')
+        print= "30대 남성"
     elif age_and_gender == '3':
         # male 40
         preference= List.objects.filter(category='음료').order_by( '-M40', 'food_name')
+        print= "40대 남성"
     elif age_and_gender == '4':
         # male 50
         preference= List.objects.filter(category='음료').order_by( '-M50', 'food_name')
+        print= "50대 남성"
     elif age_and_gender == '5':
         # male 60
         preference= List.objects.filter(category='음료').order_by( '-M60', 'food_name')
+        print= "60대 남성"
     elif age_and_gender == '6':
         # male 70
         preference= List.objects.filter(category='음료').order_by( '-M70', 'food_name') 
+        print= "70대 남성"
     elif age_and_gender == '8':
         # female 20
         preference= List.objects.filter(category='음료').order_by( '-W20', 'food_name')
+        print= "20대 여성"
     elif age_and_gender == '9':
         # female 30
         preference= List.objects.filter(category='음료').order_by( '-W30', 'food_name')
+        print= "30대 여성"
     elif age_and_gender == '10':
         # female 40
         preference= List.objects.filter(category='음료').order_by( '-W40', 'food_name')
+        print= "40대 여성"
     elif age_and_gender == '11':
         # female 50
         preference= List.objects.filter(category='음료').order_by( '-W50', 'food_name')
+        print= "50대 여성"
     elif age_and_gender == '12':
         # female 60
         preference= List.objects.filter(category='음료').order_by( '-W60', 'food_name')
+        print= "60대 여성"
     elif age_and_gender == '13':
         # female 70
         preference= List.objects.filter(category='음료').order_by( '-W70', 'food_name')
+        print= "70대 여성"
 
     beverage_category = preference
 
@@ -230,7 +268,8 @@ def Menu3(request, total=0, counter=0, cart_items = None):
         'cart_items': cart_items,
         'total':total,
         'counter':counter,
-        'page':page
+        'page':page,
+        'print':print
         }
     return render(request, 'menu3.html', context)
 
@@ -245,39 +284,51 @@ def Menu4(request, total=0, counter=0, cart_items = None):
     if age_and_gender == '1':
         # male 20
         preference= List.objects.filter(category='디저트').order_by( '-M20', 'food_name')
+        print= "20대 남성"
     elif age_and_gender == '2':
         # male 30
         preference= List.objects.filter(category='디저트').order_by( '-M30', 'food_name')
+        print= "30대 남성"
     elif age_and_gender == '3':
         # male 40
         preference= List.objects.filter(category='디저트').order_by( '-M40', 'food_name')
+        print= "40대 남성"
     elif age_and_gender == '4':
         # male 50
         preference= List.objects.filter(category='디저트').order_by( '-M50', 'food_name')
+        print= "50대 남성"
     elif age_and_gender == '5':
         # male 60
         preference= List.objects.filter(category='디저트').order_by( '-M60', 'food_name')
+        print= "60대 남성"
     elif age_and_gender == '6':
         # male 70
         preference= List.objects.filter(category='디저트').order_by( '-M70', 'food_name')
+        print= "70대 남성"
     elif age_and_gender == '8':
         # female 20
         preference= List.objects.filter(category='디저트').order_by( '-W20', 'food_name')
+        print= "20대 여성"
     elif age_and_gender == '9':
         # female 30
         preference= List.objects.filter(category='디저트').order_by( '-W30', 'food_name')
+        print= "30대 여성"
     elif age_and_gender == '10':
         # female 40
         preference= List.objects.filter(category='디저트').order_by( '-W40', 'food_name')
+        print= "40대 여성"
     elif age_and_gender == '11':
         # female 50
         preference= List.objects.filter(category='디저트').order_by( '-W50', 'food_name')
+        print= "50대 여성"
     elif age_and_gender == '12':
         # female 60
         preference= List.objects.filter(category='디저트').order_by( '-W60', 'food_name')
+        print= "60대 여성"
     elif age_and_gender == '13':
         # female 70
         preference= List.objects.filter(category='디저트').order_by( '-W70', 'food_name')
+        print= "70대 여성"
 
     dessert_category = preference
 
@@ -298,7 +349,8 @@ def Menu4(request, total=0, counter=0, cart_items = None):
         'cart_items': cart_items,
         'total':total,
         'counter':counter,
-        'page':page
+        'page':page,
+        'print':print
         }
     return render(request, 'menu4.html', context)
 
