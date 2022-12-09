@@ -7,7 +7,7 @@ app_name = 'kiosk'
 
 urlpatterns = [
 
-    # 존재하지만 안 쓰는 페이지들 ~~
+    # 존재하지만 안 쓰는 페이지 ~~
     # path('', views.Main, name='main'),
     path('place/', views.Place, name='place'),
     path('face/', views.Face, name='face'),
@@ -19,13 +19,16 @@ urlpatterns = [
     path('menu2/', views.Menu2, name='menu2'),
     path('menu3/', views.Menu3, name='menu3'),
     path('menu4/', views.Menu4, name='menu4'),
-    path('menu/order/', views.Order, name='order'),
+    path('order/', views.Order, name='order'),
+
+    # 존재하지만 용도를 찾지 못해 비어있는 페이지 ~~
     path('kitchen/', views.Kitchen, name='kitchen'),
     path('favor/', views.Favorlist, name='favor'),
 
     path('menu/add/<int:food_id>/', views.add_cart, name = 'add_cart'),
     path('menu/rm/<int:food_id>/', views.remove_cart, name = 'remove_cart'),
     path('menu/clear/', views.clear, name = 'clear_cart'),
+    path('menu/home/', views.home, name = 'home'),
 
     path('menulist/', views.MenuList, name='menulist'),
     path('menulist/<int:food_id>/', views.food_detail, name='food_detail'),

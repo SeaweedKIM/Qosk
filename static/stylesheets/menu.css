@@ -443,3 +443,74 @@ a{text-decoration:none; color:#333;}
     text-align: right;
     padding-right: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+#oh {
+    width: 1000px;
+    height: 680px;
+}
+
+#order_history {
+    width: 50%;
+    margin: 30px;
+    float: left;
+}
+
+#order_history h4 {
+    color: #4d4d4d;
+    text-align: left;
+}
+
+.order {
+    position: relative;
+    top: 20px;
+    width: 600px;
+    height: 550px;
+    border: 2px solid #3c3c3c;
+}
+
+
+.pay {
+    position: absolute;
+    top: 32%;
+    right: 9%;
+    width: 50%;
+}
+
+.pay .crd img {
+    position: relative;
+    right: 80px;
+    padding: 10px;
+}
+
+.pay .cash img {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 10px;
+}
+
+
+.amount {
+    position: absolute;
+    bottom: 15px;
+    text-align: right;
+}
+
+
+.order_tr ul{
+    padding: 10px 50px;
+}
+
+.order_tr hr {
+    margin: auto;
+    width: 90%;
+}

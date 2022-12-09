@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Customer, List, Favor, CartItem
+from .models import List, CartItem
 
 # Register your models here.
 
-admin.site.register(Customer)
+# admin.site.register(Customer)
 
 # class Inline(admin.StackedInline):
 #     model = List
@@ -24,8 +24,6 @@ admin.site.register(List, MenuAdmin)
 
 
 # admin.site.register(Bill)
-
-admin.site.register(Favor)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['food', 'quantity']

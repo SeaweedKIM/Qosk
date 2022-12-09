@@ -2,13 +2,13 @@ from django.db import models
 
 
 # Create your models here.
-class Customer(models.Model):
-    order_num = models.BigAutoField(primary_key=True)
-    date = models.DateTimeField(auto_now_add=True, null=False)
-    gender = models.CharField(max_length=50, blank=True)
-    age_group = models.CharField(max_length=255, blank=True)
-    total_num = models.IntegerField(default=0, null=False)
-    total_price = models.IntegerField(default=0, null=False)
+# class Customer(models.Model):
+#     order_num = models.BigAutoField(primary_key=True)
+#     date = models.DateTimeField(auto_now_add=True, null=False)
+#     gender = models.CharField(max_length=50, blank=True)
+#     age_group = models.CharField(max_length=255, blank=True)
+#     total_num = models.IntegerField(default=0, null=False)
+#     total_price = models.IntegerField(default=0, null=False)
 
 
 class List(models.Model):
@@ -18,7 +18,21 @@ class List(models.Model):
     food_explain = models.TextField(max_length=2000, blank=True)
     category = models.CharField(max_length=250, null=False)
     image = models.ImageField(upload_to='static/menuimg/', blank=True)
-    modify_date = models.DateTimeField(null=True, blank=True)
+
+    # modify_date = models.DateTimeField(null=True, blank=True)
+
+    M20 = models.IntegerField(default=0, null=True)
+    M30 = models.IntegerField(default=0, null=True)
+    M40 = models.IntegerField(default=0, null=True)
+    M50 = models.IntegerField(default=0, null=True)
+    M60 = models.IntegerField(default=0, null=True)
+    M70 = models.IntegerField(default=0, null=True)
+    W20 = models.IntegerField(default=0, null=True)
+    W30 = models.IntegerField(default=0, null=True)
+    W40 = models.IntegerField(default=0, null=True)
+    W50 = models.IntegerField(default=0, null=True)
+    W60 = models.IntegerField(default=0, null=True)
+    W70 = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return '{}'.format(self.food_name)
@@ -33,16 +47,12 @@ class List(models.Model):
 #     menu_num = models.ForeignKey(List, on_delete=models.CASCADE)
 
 
-class Favor(models.Model):
-    favor_num = models.BigAutoField(primary_key=True)
-    food_num = models.ForeignKey(List, on_delete=models.CASCADE)
-    under30m = models.IntegerField(default=0, null=True)
-    under50m = models.IntegerField(default=0, null=True)
-    upper50m = models.IntegerField(default=0, null=True)
-    under30f = models.IntegerField(default=0, null=True)
-    under50f = models.IntegerField(default=0, null=True)
-    upper50f = models.IntegerField(default=0, null=True)
-    total_order = models.IntegerField(default=0, null=True)
+# class Order(models.Model):
+#     food_name = models.ForeignKey(List, on_delete=models.CASCADE)
+
+
+#     def __str__(self):
+#         return '{}'.format(self.food_name)
 
 
 # Create your models here.
